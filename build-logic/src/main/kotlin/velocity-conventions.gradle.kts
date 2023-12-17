@@ -1,5 +1,3 @@
-import gradle.kotlin.dsl.accessors._58096bc43abef3d8d8d8d3f2a36c7523.shadowJar
-
 plugins {
     id("common-conventions")
     id("xyz.jpenilla.run-velocity")
