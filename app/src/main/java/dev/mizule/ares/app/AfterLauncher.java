@@ -1,10 +1,7 @@
 package dev.mizule.ares.app;
 
 import dev.mizule.ares.app.config.Config;
-import org.spongepowered.configurate.CommentedConfigurationNode;
-import org.spongepowered.configurate.ConfigurationNode;
-import org.spongepowered.configurate.hocon.HoconConfigurationLoader;
-import org.spongepowered.configurate.loader.ConfigurationLoader;
+import dev.mizule.ares.app.config.ConfigManager;
 
 import java.nio.file.Path;
 
@@ -14,34 +11,12 @@ import java.nio.file.Path;
 public class AfterLauncher {
 
     public AfterLauncher() {
-        Path configPath = Path.of("config.conf");
-        ConfigurationLoader<CommentedConfigurationNode> configLoader = HoconConfigurationLoader.builder()
-                .path(configPath)
-                .defaultOptions(options -> options.shouldCopyDefaults(true)
-                        .serializers(builder -> {
-                            builder.registerAnnotatedObjects(org.spongepowered.configurate.kotlin.ObjectMappingKt.objectMapperFactory());
-                        }))
-                .build();
+        final Path configPath = Path.of("config.conf");
+        final Config config = ConfigManager.loadConfig(configPath);
 
-        try {
-            ConfigurationNode configNode = configLoader.load();
-            Config config = configNode.get(Config.class);
-            if (config == null) {
-                throw new IllegalStateException("Could not read configuration");
-            }
+        final App app = new App(config);
+        Runtime.getRuntime().addShutdownHook(new Thread(app::stop));
 
-            if (!configPath.toFile().exists()) {
-                configNode.set(config); // update the backing node to add defaults
-                configLoader.save(configNode);
-            }
-
-            final var app = new App(config);
-            Runtime.getRuntime().addShutdownHook(new Thread(app::stop));
-
-            app.start();
-        } catch (final Exception exception) {
-            // cry
-            throw new RuntimeException((exception));
-        }
+        app.start();
     }
 }

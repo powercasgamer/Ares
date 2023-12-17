@@ -24,14 +24,37 @@
  */
 package dev.mizule.ares.app
 
+import com.varabyte.kotter.foundation.input.multilineInput
+import com.varabyte.kotter.foundation.input.onInputEntered
+import com.varabyte.kotter.foundation.input.runUntilInputEntered
+import com.varabyte.kotter.foundation.session
+import com.varabyte.kotter.foundation.text.textLine
 import dev.mizule.ares.app.config.Config
 import io.github.oshai.kotlinlogging.KotlinLogging
 
 private val logger = KotlinLogging.logger {}
 
-class App(private val config: Config) {
+class App(private var config: Config) {
 
     fun start() {
+        session {
+            lateinit var message: String
+
+            section {
+                textLine("Please type a multiline chat message. ENTER to add newlines and CTRL-D to finish:")
+                multilineInput()
+            }.runUntilInputEntered() {
+                onInputEntered {
+                    message = input
+                }
+            }
+
+            section {
+                textLine()
+                textLine("You typed: \"${message.replace("\n", "\\n")}\"")
+                textLine()
+            }.run()
+        }
         logger.info { "Starting... ${Constants.VERSION} ${Constants.GIT_BRANCH} ${Constants.GIT_COMMIT}" }
     }
 

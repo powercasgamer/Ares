@@ -16,6 +16,7 @@ dependencies {
     runtimeDownloadOnlyApi(libs.configurate.hocon)
     runtimeDownloadOnlyApi(libs.configurate.kotlin)
     runtimeDownloadOnlyApi(libs.jackson.kotlin)
+    implementation("com.varabyte.kotter:kotter-jvm:1.1.1")
 }
 
 tasks {
