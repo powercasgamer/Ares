@@ -8,6 +8,8 @@
 # other stuff
 run/
 release.sh
+libraries/
+config.conf
 
 # Created by git when using merge tools for conflicts
 *.BACKUP.*
