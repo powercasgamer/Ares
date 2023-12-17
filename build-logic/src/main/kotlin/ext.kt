@@ -1,14 +1,17 @@
 @file:Suppress("ktlint")
 
 import net.kyori.indra.git.IndraGitExtension
+import org.eclipse.jgit.lib.Repository
 import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.Project
+import org.gradle.api.Task
 import org.gradle.api.artifacts.Configuration
 import org.gradle.api.artifacts.ExternalModuleDependency
 import org.gradle.api.provider.Provider
 import org.gradle.api.tasks.bundling.Jar
 import org.gradle.kotlin.dsl.*
 import org.gradle.kotlin.dsl.support.uppercaseFirstChar
+import xyz.jpenilla.gremlin.gradle.ShadowGremlin
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -20,6 +23,31 @@ val Project.ci: Provider<Boolean>
     get() = providers.environmentVariable("CI")
         .map { it.toBoolean() }
         .orElse(false)
+
+fun Project.lastCommitHash(error: Boolean = false): String =
+    the<IndraGitExtension>().commit()?.name?.substring(0, 7)
+        ?: if (error) error("Could not determine commit hash") else "unknown"
+
+fun Project.currentBranch(): String {
+    System.getenv("GITHUB_HEAD_REF")?.takeIf { it.isNotEmpty() }
+        ?.let { return it }
+    System.getenv("GITHUB_REF")?.takeIf { it.isNotEmpty() }
+        ?.let { return it.replaceFirst("refs/heads/", "") }
+
+    val indraGit = the<IndraGitExtension>().takeIf { it.isPresent }
+
+    val ref = indraGit?.git()?.repository?.exactRef("HEAD")?.target
+        ?: return "detached-head"
+
+    return Repository.shortenRefName(ref.name)
+}
+
+/**
+ * Relocate a package into the `dev.mizule.ares.libs.` namespace.
+ */
+fun Task.relocateDependency(pkg: String) {
+    ShadowGremlin.relocate(this, pkg, "dev.mizule.ares.libs.$pkg")
+}
 
 fun Project.versionString(): String = this.version as String
 

@@ -32,7 +32,7 @@ private val logger = KotlinLogging.logger {}
 class App(private val config: Config) {
 
     fun start() {
-        logger.info { "Starting..." }
+        logger.info { "Starting... ${Constants.VERSION} ${Constants.GIT_BRANCH} ${Constants.GIT_COMMIT}" }
     }
 
     fun stop() {
