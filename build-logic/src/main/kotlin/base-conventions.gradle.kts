@@ -18,12 +18,7 @@ repositories {
     sonatype.s01Snapshots()
     sonatype.ossSnapshots()
     maven("https://repo.papermc.io/repository/maven-public/")
-    maven("https://maven.reposilite.com/snapshots") {
-        mavenContent {
-            snapshotsOnly()
-            includeGroup("io.javalin")
-        }
-    }
+    maven("https://maven.mizule.dev/")
 }
 
 extensions.configure(IndraExtension::class) {
@@ -59,4 +54,8 @@ tasks {
 }
 
 idea {
+    module {
+        isDownloadJavadoc = true
+        isDownloadSources = true
+    }
 }

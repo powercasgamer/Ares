@@ -21,7 +21,7 @@ extensions.getByType(BasePluginExtension::class.java).archivesName.set(project.n
 indra {
     javaVersions {
         minimumToolchain(21)
-        target(21)
+        target(17)
     }
     mitLicense()
 
@@ -100,12 +100,22 @@ tasks {
         mergeServiceFiles()
         transform(Log4j2PluginsCacheFileTransformer::class.java)
 
-        relocate("xyz.jpenilla.gremlin", "dev.mizule.timetriggeredperms.lib.xyz.jpenilla.gremlin")
-        relocate("org.bstats", "dev.mizule.timetriggeredperms.lib.org.bstats")
+        relocate("xyz.jpenilla.gremlin", "dev.mizule.aes.lib.xyz.jpenilla.gremlin")
+    }
+
+    clean {
+        delete("run")
     }
 
     create("format") {
         dependsOn("spotlessApply")
+    }
+
+    spotlessCheck {
+        dependsOn(gradle.includedBuild("build-logic").task(":spotlessCheck"))
+    }
+    spotlessApply {
+        dependsOn(gradle.includedBuild("build-logic").task(":spotlessApply"))
     }
 
     withType<JavaCompile>().configureEach {

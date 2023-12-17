@@ -1,4 +1,5 @@
 [versions]
+# build-logic
 indra = "3.1.3"
 blossom = "2.1.0"
 shadow = "8.1.1"
@@ -6,11 +7,33 @@ kotlin = "1.9.21"
 gremlin = "0.0.3"
 idea-gradle = "1.1.7"
 run-task = "2.2.2"
-hangar-publish = "0.1.0"
-spotless = "6.23.2"
+hangar-publish = "0.1.1"
+spotless = "6.23.3"
 ktlint = "1.0.1"
 
+# configurate
+configurate = "4.2.0-SNAPSHOT"
+jackson = "2.16.0"
+slf4j = "2.0.9"
+kotlin-slf4j = "5.1.1"
+
 [libraries]
+# configurate
+configurate-core = { module = "org.spongepowered:configurate-core", version.ref = "configurate" }
+configurate-jackson = { module = "org.spongepowered:configurate-jackson", version.ref = "configurate" }
+configurate-kotlin = { module = "org.spongepowered:configurate-extra-kotlin", version.ref = "configurate" }
+configurate-hocon = { module = "org.spongepowered:configurate-hocon", version.ref = "configurate" }
+configurate-gson = { module = "org.spongepowered:configurate-gson", version.ref = "configurate" }
+configurate-yaml = { module = "org.spongepowered:configurate-yaml", version.ref = "configurate" }
+
+# slf4j
+slf4j-api = { module = "org.slf4j:slf4j-api", version.ref = "slf4j" }
+slf4j-simple = { module = "org.slf4j:slf4j-simple", version.ref = "slf4j" }
+slf4j-kotlin = { module = "io.github.oshai:kotlin-logging-jvm", version.ref = "kotlin-slf4j" }
+
+# jackson
+jackson-kotlin = { module = "com.fasterxml.jackson.module:jackson-module-kotlin", version.ref = "jackson" }
+
 # build-logic stuff
 blossom = { module = "net.kyori:blossom", version.ref = "blossom" }
 indra-common = { module = "net.kyori:indra-common", version.ref = "indra" }
@@ -27,5 +50,4 @@ run-task = { module = "xyz.jpenilla:run-task", version.ref = "run-task" }
 hangar-publish = { module = "io.papermc:hangar-publish-plugin", version.ref = "hangar-publish" }
 
 [plugins]
-gremlin-gradle = { id = "xyz.jpenilla.gremlin-gradle", version.ref = "gremlin" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }

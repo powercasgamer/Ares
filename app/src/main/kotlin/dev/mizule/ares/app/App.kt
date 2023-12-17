@@ -1,5 +1,5 @@
 /*
- * This file is part of pulse, licensed under the MIT License.
+ * This file is part of Ares, licensed under the MIT License.
  *
  * Copyright (c) 2023 powercas_gamer
  * Copyright (c) 2023 contributors

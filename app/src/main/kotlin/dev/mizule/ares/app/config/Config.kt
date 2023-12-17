@@ -1,5 +1,5 @@
 /*
- * This file is part of pulse, licensed under the MIT License.
+ * This file is part of Ares, licensed under the MIT License.
  *
  * Copyright (c) 2023 powercas_gamer
  * Copyright (c) 2023 contributors
@@ -25,9 +25,8 @@
 package dev.mizule.ares.app.config
 
 import org.spongepowered.configurate.objectmapping.ConfigSerializable
-import org.spongepowered.configurate.objectmapping.meta.Comment
 
 @ConfigSerializable
 data class Config(
-    val yeet: String = "YEET"
+    val yeet: String = "YEET",
 )

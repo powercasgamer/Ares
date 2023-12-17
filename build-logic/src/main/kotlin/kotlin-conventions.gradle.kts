@@ -11,7 +11,7 @@ plugins {
 tasks {
     withType(KotlinCompile::class).configureEach {
         compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_21)
+            jvmTarget.set(JvmTarget.JVM_17)
             languageVersion.set(KotlinVersion.KOTLIN_1_9)
         }
     }
