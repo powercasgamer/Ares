@@ -36,6 +36,6 @@ class App(private val config: Config) {
     }
 
     fun stop() {
-        logger.info { "Shutting down..." }
+        logger.info { "Shutting down... ${config.example}" }
     }
 }

@@ -17,12 +17,10 @@ public class AfterLauncher {
         Path configPath = Path.of("config.conf");
         ConfigurationLoader<CommentedConfigurationNode> configLoader = HoconConfigurationLoader.builder()
                 .path(configPath)
-                .defaultOptions(options -> {
-                    return options.shouldCopyDefaults(true)
-                            .serializers(builder -> {
-                                builder.registerAnnotatedObjects(org.spongepowered.configurate.kotlin.ObjectMappingKt.objectMapperFactory());
-                            });
-                })
+                .defaultOptions(options -> options.shouldCopyDefaults(true)
+                        .serializers(builder -> {
+                            builder.registerAnnotatedObjects(org.spongepowered.configurate.kotlin.ObjectMappingKt.objectMapperFactory());
+                        }))
                 .build();
 
         try {

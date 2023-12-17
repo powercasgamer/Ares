@@ -1,5 +1,3 @@
-import java.util.*
-
 plugins {
     id("common-conventions")
     id("kotlin-conventions")
@@ -22,8 +20,11 @@ dependencies {
 
 tasks {
     shadowJar {
-        relocateDependency(libs.slf4j.simple.get().group!!)
-        relocateDependency(libs.slf4j.api.get().group!!)
+        val relocate: Boolean = false
+        if (relocate) {
+            relocateDependency(libs.slf4j.simple.get().group!!)
+            relocateDependency(libs.slf4j.api.get().group!!)
+        }
     }
 }
 
