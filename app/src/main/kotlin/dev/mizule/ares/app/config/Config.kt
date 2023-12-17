@@ -25,8 +25,10 @@
 package dev.mizule.ares.app.config
 
 import org.spongepowered.configurate.objectmapping.ConfigSerializable
+import org.spongepowered.configurate.objectmapping.meta.Comment
 
 @ConfigSerializable
 data class Config(
-    val yeet: String = "YEET",
+    @Comment("This is an example")
+    val example: String = "Example",
 )

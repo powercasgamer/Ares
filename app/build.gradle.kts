@@ -4,6 +4,7 @@ plugins {
     id("common-conventions")
     id("kotlin-conventions")
     id("gremlin-stuff")
+    id("blossom-stuff")
     id("app-conventions")
 }
 

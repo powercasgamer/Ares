@@ -17,7 +17,7 @@ public class Launcher {
             loadLatch.countDown();
         }
 
-        new AfterLauncher();
+        new AfterLauncher(); // AAAAAAA
     }
 
     private static void downloadDependencies() {
