@@ -15,7 +15,7 @@ ktlint = "1.0.1"
 configurate = "4.2.0-SNAPSHOT"
 jackson = "2.16.0"
 slf4j = "2.0.9"
-kotlin-slf4j = "5.1.1"
+kotlin-slf4j = "6.0.1"
 
 [libraries]
 # configurate
