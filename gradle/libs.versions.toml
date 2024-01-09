@@ -3,7 +3,7 @@
 indra = "3.1.3"
 blossom = "2.1.0"
 shadow = "8.1.1"
-kotlin = "1.9.21"
+kotlin = "1.9.22"
 gremlin = "0.0.3"
 idea-gradle = "1.1.7"
 run-task = "2.2.2"
@@ -13,9 +13,9 @@ ktlint = "1.0.1"
 
 # configurate
 configurate = "4.2.0-SNAPSHOT"
-jackson = "2.16.0"
-slf4j = "2.0.9"
-kotlin-slf4j = "5.1.1"
+jackson = "2.16.1"
+slf4j = "2.0.11"
+kotlin-slf4j = "5.1.4"
 
 [libraries]
 # configurate
